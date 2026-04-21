@@ -72,6 +72,40 @@ export default function Sidebar() {
         <Link href={"/login"} ><LogOut size={15} /></Link>
       </div>
     </div>
+
+
+
+
+{/* =====================================mobile=============================== */}
+ <div className="lg:hidden fixed bottom-0 left-0   h-15 w-full bg-gray-950 rounded-t-lg">
+    
+      <div className="items-center  justify-center flex space-x-6 ">
+        {navLinks.map((item, index) => {
+      
+          const Icon = item.icon;
+          const isActive = pathname === item.path;
+          return (
+            <Link
+            href={item.path}
+          key={index}
+           onClick={() => router.push(item.path)}
+           className={`p-3 cursor-pointer  transition ${
+            isActive
+            ?"text-cyan-300"
+            :"text-gray-300"
+        }`}
+
+           >
+            <Icon size={15} />
+           </Link>
+          )
+          
+        })}
+      </div>
+
+      
+    </div>
+    
     
   
   
