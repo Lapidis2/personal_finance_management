@@ -3,7 +3,7 @@ import Sidebar from "@/components/layout/SideBar"
 
 export default function PotsPage() {
   return (
-<div className="ml-20">
+<div className="lg:ml-20">
     <Sidebar/>
         <div className="p-8">
       <div className="flex justify-between items-center mb-8">

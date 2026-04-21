@@ -4,7 +4,7 @@ import SpendingSummary from "@/components/spendSummary"
 
 export default function BudgetsPage() {
   return (
-   <div className="ml-20">
+   <div className="lg:ml-20">
     <Sidebar/>
      <div className="p-8">
       {/* Header */}
