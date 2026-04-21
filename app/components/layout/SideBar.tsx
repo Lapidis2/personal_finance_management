@@ -77,34 +77,39 @@ export default function Sidebar() {
 
 
 {/* =====================================mobile=============================== */}
- <div className="lg:hidden fixed bottom-0 left-0   h-15 w-full bg-gray-950 rounded-t-lg">
+ <div className="lg:hidden fixed bottom-0 left-0 h-16 w-full bg-gray-950 rounded-t-lg flex justify-around py-3 items-center">
     
-      <div className="items-center  justify-center flex space-x-6 ">
-        {navLinks.map((item, index) => {
       
-          const Icon = item.icon;
-          const isActive = pathname === item.path;
-          return (
-            <Link
-            href={item.path}
-          key={index}
-           onClick={() => router.push(item.path)}
-           className={`p-3 cursor-pointer  transition ${
-            isActive
-            ?"text-cyan-300"
-            :"text-gray-300"
-        }`}
+      
+  {navLinks.map((item, index) => {
+    const Icon = item.icon;
+    const isActive = pathname === item.path;
 
-           >
-            <Icon size={15} />
-           </Link>
-          )
-          
-        })}
-      </div>
+    return (
+      <Link
+        href={item.path}
+        key={index}
+        className="flex-1 h-full flex items-center justify-center relative ml-2  "
+      >
+        <div
+          className={`flex flex-col items-center justify-center w-full h-full transition ${
+            isActive ? "text-cyan-300 bg-white h-1 mb-0 rounded-t-lg" : "text-gray-300"
+          }`}
+        >
+          <Icon size={18} />
+        </div>
+
+        
+        {isActive && (
+          <span className="absolute bottom-0 left-0 w-full h-1 bg-cyan-300" />
+        )}
+      </Link>
+    );
+  })}
+</div>
+       
 
       
-    </div>
     
     
   
