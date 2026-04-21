@@ -1,49 +1,50 @@
-'use client';
+"use client"
 
-type Pot = {
-  name: string;
-  amount: number;
-  color: string;
-};
+const TOTAL = 2500
+const SAVED = 0
 
-const pots: Pot[] = [
-  { name: "Savings", amount: 159, color: "bg-green-400" },
-  { name: "Gift", amount: 40, color: "bg-cyan-400" },
-  { name: "Concert Ticket", amount: 110, color: "bg-purple-400" },
-  { name: "New Laptop", amount: 10, color: "bg-yellow-400" },
-];
-
-export default function PotsCard() {
-  const total = pots.reduce((acc, p) => acc + p.amount, 0);
+export default function PotCard() {
+  const percentage = (SAVED / TOTAL) * 100
 
   return (
-    <div className="bg-white p-5 rounded-xl">
-      <h3 className="font-semibold mb-4">Pots</h3>
-
-      {/* Total */}
-      <div className="bg-gray-100 p-4 rounded-lg mb-4">
-        <p className="text-sm text-gray-500">Total Saved</p>
-        <h2 className="text-2xl font-bold">${total}</h2>
+    <div className="bg-white rounded-xl p-6 shadow-sm">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-6">
+        <div className="flex items-center gap-2">
+          <span className="w-3 h-3 bg-teal-600 rounded-full" />
+          <h3 className="font-semibold">Daily food</h3>
+        </div>
+        <span className="cursor-pointer">⋯</span>
       </div>
 
-      {/* Pots list */}
-      <div className="space-y-3">
-        {pots.map((pot, i) => (
-          <div key={i}>
-            <div className="flex justify-between text-sm mb-1">
-              <span>{pot.name}</span>
-              <span>${pot.amount}</span>
-            </div>
+      {/* Total Saved */}
+      <div className="flex justify-between items-end mb-4">
+        <p className="text-gray-500 text-sm">Total Saved</p>
+        <p className="text-3xl font-bold">$0.00</p>
+      </div>
 
-            <div className="w-full bg-gray-200 h-2 rounded-full">
-              <div
-                className={`${pot.color} h-2 rounded-full`}
-                style={{ width: `${(pot.amount / total) * 100}%` }}
-              />
-            </div>
-          </div>
-        ))}
+      {/* Progress */}
+      <div className="w-full h-3 bg-gray-100 rounded-full overflow-hidden mb-2">
+        <div
+          className="h-full bg-teal-600 transition-all duration-700"
+          style={{ width: `${percentage === 0 ? 4 : percentage}%` }}
+        />
+      </div>
+
+      <div className="flex justify-between text-xs text-gray-500 mb-6">
+        <span>{percentage.toFixed(2)}%</span>
+        <span>Target of ${TOTAL.toLocaleString()}</span>
+      </div>
+
+      {/* Actions */}
+      <div className="flex gap-4">
+        <button className="flex-1 bg-[#F7F4EF] py-2 rounded-lg font-medium">
+          + Add Money
+        </button>
+        <button className="flex-1 bg-[#F7F4EF] py-2 rounded-lg font-medium">
+          Withdraw
+        </button>
       </div>
     </div>
-  );
+  )
 }
