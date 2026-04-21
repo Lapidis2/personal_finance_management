@@ -1,5 +1,5 @@
 
-import Sidebar from '../components/layout/SideBar'
+import Sidebar from '../../components/layout/SideBar'
 
 function page() {
   return (
