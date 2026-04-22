@@ -1,10 +1,10 @@
 import PotCard from "@/components/cards/pots"
-import Sidebar from "@/components/layout/SideBar"
+
 
 export default function PotsPage() {
   return (
 <div className="lg:ml-20">
-    <Sidebar/>
+   
         <div className="p-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Pots</h1>

@@ -1,11 +1,10 @@
 import BudgetCard from "@/components/cards/budget"
-import Sidebar from "@/components/layout/SideBar"
 import SpendingSummary from "@/components/spendSummary"
 
 export default function BudgetsPage() {
   return (
    <div className="lg:ml-20">
-    <Sidebar/>
+  
      <div className="p-8">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">

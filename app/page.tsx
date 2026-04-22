@@ -2,13 +2,13 @@ import PotCard from "@/components/cards/pots";
 
 import TransactionsCard from "@/components/cards/TransactionCard";
 import BillsSummaryCard from "@/components/cards/bills";
-import Sidebar from "@/components/layout/SideBar";
+
 
 
 export default function HomePage() {
   return (
    <div className="lg:ml-20 ">
-      <Sidebar />
+      
      <div className="bg-[#F7F4EF] min-h-screen p-6">
 
       {/* HEADER */}

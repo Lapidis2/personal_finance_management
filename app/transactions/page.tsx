@@ -1,12 +1,12 @@
 'use client';
 
-import Sidebar from "@/components/layout/SideBar";
+
 
 export default function TransactionsPage() {
   return (
     <div className="lg:ml-20">
       
-      <Sidebar />
+  
        <div className="p-8 bg-[#f5f3f1] min-h-screen">
       
       {/* 🔝 Header */}
