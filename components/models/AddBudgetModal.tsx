@@ -1,21 +1,35 @@
 "use client";
 
 import { useState } from "react";
-import { Budget, themes } from "@/types/budget";
+import { X } from "lucide-react";
 
-export default function AddBudgetModal({ onClose }: { onClose: () => void }) {
+const themes = [
+  "#3B82F6",
+  "#22C55E",
+  "#EF4444",
+  "#F59E0B",
+  "#A855F7",
+  "#06B6D4",
+  "#F97316",
+  "#14B8A6",
+  "#EC4899",
+  "#84CC16",
+];
+
+export default function AddBudgetModal({
+  onClose,
+}: {
+  onClose: () => void;
+}) {
   const [form, setForm] = useState({
     category: "",
     maxSpend: "",
     theme: "",
+    openTheme: false,
   });
 
-  const selectTheme = (color: string) => {
-    setForm({ ...form, theme: color });
-  };
-
   const handleSubmit = () => {
-    const newBudget: Budget = {
+    const newBudget = {
       id: crypto.randomUUID(),
       category: form.category,
       maxSpend: Number(form.maxSpend),
@@ -23,53 +37,114 @@ export default function AddBudgetModal({ onClose }: { onClose: () => void }) {
     };
 
     const existing = JSON.parse(localStorage.getItem("budgets") || "[]");
-    localStorage.setItem("budgets", JSON.stringify([...existing, newBudget]));
+    localStorage.setItem(
+      "budgets",
+      JSON.stringify([...existing, newBudget])
+    );
 
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-xl w-100 max-w-md">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+      <div className="bg-white w-105 rounded-xl p-6 relative">
 
-        <h2 className="text-lg font-semibold mb-3">Add New Budget</h2>
+   
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-500 hover:text-black"
+        >
+          <X size={18} />
+        </button>
+
+        {/* Title */}
+        <h2 className="text-xl font-semibold mb-2">Add New Budget</h2>
+
+        <p className="text-sm text-gray-500 mb-6">
+          Choose a category to set a spending budget. These categories can help
+          you monitor spending.
+        </p>
 
         {/* Category */}
-        <input
-          placeholder="Category (e.g Groceries)"
-          className="border p-2 w-full mb-3"
-          onChange={(e) => setForm({ ...form, category: e.target.value })}
-        />
+        <div className="mb-4">
+          <label className="text-sm font-medium">Category</label>
+          <select
+            className="w-full border p-2 rounded mt-1"
+            value={form.category}
+            onChange={(e) =>
+              setForm({ ...form, category: e.target.value })
+            }
+          >
+            <option value="">Select a category</option>
+            <option>Groceries</option>
+            <option>Transportation</option>
+            <option>Entertainment</option>
+            <option>Shopping</option>
+          </select>
+        </div>
 
-        {/* Max Spend */}
-        <input
-          placeholder="Max Spend"
-          type="number"
-          className="border p-2 w-full mb-3"
-          onChange={(e) => setForm({ ...form, maxSpend: e.target.value })}
-        />
+        {/* Maximum Spend */}
+        <div className="mb-4">
+          <label className="text-sm font-medium">Maximum Spend</label>
+          <input
+            type="number"
+            placeholder="e.g. $2000"
+            className="w-full border p-2 rounded mt-1"
+            value={form.maxSpend}
+            onChange={(e) =>
+              setForm({ ...form, maxSpend: e.target.value })
+            }
+          />
+        </div>
 
-        {/* Theme picker */}
-        <p className="text-sm mb-2">Choose theme</p>
-        <div className="flex gap-2 mb-4">
-          {themes.map((color) => (
+        {/* Theme Dropdown */}
+        <div className="mb-6 relative">
+          <label className="text-sm font-medium">Theme</label>
+
+          {/* Selected */}
+          <div
+            onClick={() =>
+              setForm({ ...form, openTheme: !form.openTheme })
+            }
+            className="w-full border p-2 rounded mt-1 cursor-pointer flex items-center justify-between"
+          >
+            <span>
+              {form.theme ? "Selected" : "Select a theme"}
+            </span>
+
             <div
-              key={color}
-              onClick={() => selectTheme(color)}
-              className={`w-6 h-6 rounded-full cursor-pointer border-2 ${
-                form.theme === color ? "border-black" : "border-transparent"
-              }`}
-              style={{ backgroundColor: color }}
+              className="w-4 h-4 rounded-full"
+              style={{ backgroundColor: form.theme || "#ddd" }}
             />
-          ))}
+          </div>
+
+          {/* Dropdown */}
+          {form.openTheme && (
+            <div className="absolute mt-2 w-full bg-white border rounded-lg shadow-md p-2 grid grid-cols-5 gap-2 z-10">
+              {themes.map((color) => (
+                <div
+                  key={color}
+                  onClick={() =>
+                    setForm({
+                      ...form,
+                      theme: color,
+                      openTheme: false,
+                    })
+                  }
+                  className="w-5 h-5 rounded-full cursor-pointer border hover:scale-110 transition"
+                  style={{ backgroundColor: color }}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Submit */}
         <button
           onClick={handleSubmit}
-          className="bg-cyan-500 text-white w-full p-2 rounded"
+          className="w-full bg-cyan-500 text-white py-2 rounded-lg hover:bg-cyan-600"
         >
-          Add Budget
+          Submit
         </button>
       </div>
     </div>
