@@ -11,7 +11,7 @@ export default function HomePage() {
       
      <div className="bg-[#F7F4EF] min-h-screen p-6">
 
-      {/* HEADER */}
+     
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Overview</h1>
         <button className="bg-black text-white px-4 py-2 rounded-lg">
