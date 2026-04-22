@@ -30,6 +30,7 @@ export default function BillsSummaryCard() {
           <span className="text-red-500">Due Soon</span>
           <span className="text-red-500">$0.00</span>
         </div>
+        
       </div>
     </div>
   )
